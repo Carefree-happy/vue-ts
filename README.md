@@ -1,29 +1,48 @@
-2.3 如何 ts 在 vue3 中定义组件
+2.4 如何提取 props 定义
 
-defineComponent 函数
+传递不同的值类型
+```js
+export default {
+  props: {
+    greetingMessage: String
+  }
+}
+```
 
-如何定义 Props 的类型
+```html
+<span>{{ greetingMessage }}</span>
 
-查看 vue 源码
-```ts
-export type DefineComponent<
-  PropsOrPropOptions = {},
-  RawBindings = {},
-  D = {},
-  C extends ComputedOptions = ComputedOptions,
-  M extends MethodOptions = MethodOptions,
-  Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
-  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-  E extends EmitsOptions = {},
-  EE extends string = string,
-  PP = PublicProps,
-  Props = Readonly< PropsOrPropOptions extends ComponentPropsOptions
-      ? ExtractPropTypes<PropsOrPropOptions>
-      : PropsOrPropOptions
-  > & ({} extends E ? {} : EmitsToProps<E>),
-  Defaults = ExtractDefaultPropTypes<PropsOrPropOptions>
-> = ComponentPublicInstanceConstructor<CreateComponentPublicInstance<Props, RawBindings, D, C, M, Mixin, Extends, E, PP & Props, Defaults, true > & Props > &
-  ComponentOptionsBase<Props, RawBindings, D, C, M, Mixin, Extends, E, EE, Defaults> & PP;
+<!-- 组件 静态 vs. 动态 Prop -->
+<!-- 字符串 -->
+<MyComponent greeting-message="hello" />
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :title="post.title" />
+<!-- 根据一个更复杂表达式的值动态传入 -->
+<BlogPost :title="post.title + ' by ' + post.author.name" />
 
-type MyComponent = DefineComponent<{ a: string }, { name: string }, {}, { count: () => number}>
+<!-- Number 静态｜动态值 -->
+<BlogPost :likes="42" />
+<BlogPost :likes="post.likes" />
+
+<!-- Boolean 静态值与动态值 -->
+<!-- 仅写上 prop 但不传值，会隐式转换为 `true` -->
+<BlogPost is-published />
+<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
+<BlogPost :is-published="false" />
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :is-published="post.isPublished" />
+
+<!-- Array 静态值与动态值 -->
+<!-- 虽然这个数组是个常量，我们还是需要使用 v-bind -->
+<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
+<BlogPost :comment-ids="[234, 266, 273]" />
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :comment-ids="post.commentIds" />
+
+<!-- Object 静态值与动态值 -->
+<!-- 虽然这个对象字面量是个常量，我们还是需要使用 v-bind -->
+<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
+<BlogPost :author="{ name: 'Veronica',  company: 'Veridian Dynamics'}"/>
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :author="post.author" />
 ```

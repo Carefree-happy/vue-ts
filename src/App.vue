@@ -1,37 +1,21 @@
 <template>
     <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <HelloWorld msg="Welcome" :age="12" :config="{ name: 'qwqwq' }" />
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue"
+import { defineComponent } from "vue"
 import HelloWorld from "./components/HelloWorld.vue"
-
-interface Config {
-    name: string
-}
 
 export default defineComponent({
     name: "App",
-    props: {
-        age: {
-            type: Number as PropType<number>,
-        },
-        config: {
-            type: Object as PropType<Config>,
-            required: true,
-        },
-    },
     components: {
         HelloWorld,
     },
     data() {
         return {
-            name: "sunjing",
+            name: "jokcy",
         }
-    },
-    mounted() {
-        this.config
     },
 })
 </script>
