@@ -21,3 +21,7 @@ Vue CLI v5.0.8
 ? Pick a unit testing solution: Jest
 ? Where do you prefer placing config for Babel, ESLint, etc.? In dedicated config files
 ? Save this as a preset for future projects? (y/N) y
+
+wrokspace 
+format
+Format On Save
