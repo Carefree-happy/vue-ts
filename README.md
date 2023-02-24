@@ -1,27 +1,29 @@
-vue ts
+2.3 如何 ts 在 vue3 中定义组件
 
-开源项目的开发发布流程
+defineComponent 函数
 
-如何更合理得设计广泛适用性的API
+如何定义 Props 的类型
 
-如何保证代码质量
+查看 vue 源码
+```ts
+export type DefineComponent<
+  PropsOrPropOptions = {},
+  RawBindings = {},
+  D = {},
+  C extends ComputedOptions = ComputedOptions,
+  M extends MethodOptions = MethodOptions,
+  Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
+  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
+  E extends EmitsOptions = {},
+  EE extends string = string,
+  PP = PublicProps,
+  Props = Readonly< PropsOrPropOptions extends ComponentPropsOptions
+      ? ExtractPropTypes<PropsOrPropOptions>
+      : PropsOrPropOptions
+  > & ({} extends E ? {} : EmitsToProps<E>),
+  Defaults = ExtractDefaultPropTypes<PropsOrPropOptions>
+> = ComponentPublicInstanceConstructor<CreateComponentPublicInstance<Props, RawBindings, D, C, M, Mixin, Extends, E, PP & Props, Defaults, true > & Props > &
+  ComponentOptionsBase<Props, RawBindings, D, C, M, Mixin, Extends, E, EE, Defaults> & PP;
 
-vue3的实现原理
-
-vue create vue3-ts
-
-Vue CLI v5.0.8
-? Please pick a preset: Manually select features
-? Check the features needed for your project: Babel, TS, Linter, Unit
-? Choose a version of Vue.js that you want to start the project with 3.x
-? Use class-style component syntax? No
-? Use Babel alongside TypeScript (required for modern mode, auto-detected polyfills, transpiling JSX)? Yes
-? Pick a linter / formatter config: Prettier
-? Pick additional lint features: Lint on save, Lint and fix on commit
-? Pick a unit testing solution: Jest
-? Where do you prefer placing config for Babel, ESLint, etc.? In dedicated config files
-? Save this as a preset for future projects? (y/N) y
-
-wrokspace 
-format
-Format On Save
+type MyComponent = DefineComponent<{ a: string }, { name: string }, {}, { count: () => number}>
+```
