@@ -1,11 +1,5 @@
-2.8 使用jsx开发vue3组件
+2.9 为什么vscode没有对props类型进行提醒
 
-[Babel Plugin JSX for Vue 3.0](https://github.com/vuejs/babel-plugin-jsx)
+.vue 文件不能很好支持 TS 类型检查
 
-```
-npm install @vue/babel-plugin-jsx -D
-```
-
-vue 的 JSX 组件 props 不对应时，并不能直接飘红，而是要等到编译完成后才结束
-
-v-mode 双向绑定 见识了
+更换为 .tsx 文件进行开发即可

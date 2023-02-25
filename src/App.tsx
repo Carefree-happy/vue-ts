@@ -1,5 +1,5 @@
-import HelloWorld from "@/components/HelloWorld.vue"
-import { defineComponent, reactive, ref, render } from "vue"
+import HelloWorld from "@/components/HelloWorld"
+import { defineComponent, reactive, ref } from "vue"
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const img = require("./assets/logo.png")
@@ -9,7 +9,7 @@ interface Config {
 }
 
 function renderHelloWorld(msg: string, config: Config, age: number) {
-    return <HelloWorld msg={msg} config={config} age={age} />
+    return <HelloWorld age={age} />
 }
 
 export default defineComponent({
