@@ -1,4 +1,11 @@
-2.4 setup返回render函数的方法
+2.8 使用jsx开发vue3组件
 
-setup 写法，有点像 react 16.8之前的版本
-h 函数的方法在代码量变大时，代码阅读性很低，所以需要 JSX 进行替代
+[Babel Plugin JSX for Vue 3.0](https://github.com/vuejs/babel-plugin-jsx)
+
+```
+npm install @vue/babel-plugin-jsx -D
+```
+
+vue 的 JSX 组件 props 不对应时，并不能直接飘红，而是要等到编译完成后才结束
+
+v-mode 双向绑定 见识了
