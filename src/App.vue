@@ -15,6 +15,10 @@ export default defineComponent({
     components: {
         HelloWorld,
     },
+    // 通过变量名直接获取，可以过滤掉ref所在的层
+    mounted() {
+        console.log(this.name)
+    },
     setup(props, { slots, attrs, emit }) {
         // ### reactive
         // let name = "MAX"

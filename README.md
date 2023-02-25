@@ -1,17 +1,4 @@
-2.4 setup 的运用和其意义
-```ts
-export declare const createVNode: typeof _createVNode;
+2.4 setup返回render函数的方法
 
-declare function _createVNode(
-  type: VNodeTypes | ClassComponent | typeof NULL_DYNAMIC_COMPONENT, 
-  props?: (Data & VNodeProps) | null, 
-  children?: unknown, 
-  patchFlag?: number,
-  dynamicProps?: string[] | null, 
-  isBlockNode?: boolean): VNode;
-```
-后三个参数与代码优化有关
-
-setup(props, { slots, attrs, emit }) {
-  return {}
-}
+setup 写法，有点像 react 16.8之前的版本
+h 函数的方法在代码量变大时，代码阅读性很低，所以需要 JSX 进行替代
