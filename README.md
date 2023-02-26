@@ -1,5 +1,3 @@
-2.9 什么是 json-schema
+3.2 如何试用ajv来定义和校验json schema
 
-[json-schema](https://json-schema.org/)
-
-[Ajv JSON schema keywords](https://ajv.js.org/keywords.html)
+使用json-schema校验数据
