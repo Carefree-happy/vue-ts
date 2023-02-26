@@ -1,5 +1,6 @@
 var Ajv = require("ajv")
 var addFormats = require("ajv-formats")
+var locatize = require("ajv-i18n")
 
 const schema = {
     type: "object",
@@ -30,7 +31,7 @@ const schema = {
 }
 
 const data = {
-    name: "1252051394@qq.com",
+    name: "haha",
     age: 12,
     pets: ["cat", "dog"],
     isWorker: true,
@@ -51,7 +52,7 @@ ajv.addKeyword("test", {
     // 返回一个 schema
     // macro() {
     //     return {
-    //         minLength: 10,
+    //         minLength: 12,
     //     }
     // },
     // 课程的方式，不能通过 these parameters are deprecated, see docs for addKeyword
@@ -64,13 +65,25 @@ ajv.addKeyword("test", {
     // metaSchema: {
     //     type: "boolean",
     // },
-    // validate(schema, data) {
-    //     // 数据校验时调用，schema 对应关键字的值， data 对应实际的值，return 进行错误信息自定义
-    //     console.log(schema, data)
-    //     return true
-    // },
+    validate: function fun(schema, data) {
+        // 数据校验时调用，schema 对应关键字的值， data 对应实际的值，return 进行错误信息自定义
+        // 添加自定义关键字, 自定义返回的错误信息，键对值不对
+        fun.errors = [
+            {
+                instancePath: "/name",
+                schemaPath: "#/properties/name/test",
+                keyword: "test",
+                params: { keyword: "test" },
+                message: '应当通过 "test 关键词"',
+            },
+        ]
+        return false
+    },
 })
 
 var validate = ajv.compile(schema)
 var valid = validate(data)
-if (!valid) console.log(validate.errors)
+if (!valid) {
+    locatize.zh(validate.errors)
+    console.log(validate.errors)
+}
