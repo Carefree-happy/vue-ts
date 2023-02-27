@@ -1,59 +1,42 @@
-import HelloWorld from "@/components/HelloWorld"
-import { defineComponent, reactive, ref } from "vue"
+import { defineComponent, Ref, ref } from "vue"
+import { createUseStyles } from "vue-jss"
+import MonacoEditor from "./components/MonacoEditor"
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const img = require("./assets/logo.png")
-
-interface Config {
-    name: string
+function toJson(data: any) {
+    return JSON.stringify(data, null, 2)
 }
 
-function renderHelloWorld(msg: string, config: Config, age: number) {
-    return <HelloWorld age={age} />
+const schema = {
+    type: "string",
 }
+
+const useStyles = createUseStyles({
+    editor: {
+        minHeight: 400,
+    },
+})
 
 export default defineComponent({
     setup() {
-        const state = reactive({ name: "jocky" })
+        const schemaRef: Ref<any> = ref(schema)
 
-        const numberRef = ref(1)
+        const handleCodeChange = (code: string) => {
+            let data: any
+            try {
+                data = JSON.stringify(code)
+            } catch (err) {
+                console.log(err)
+            }
+        }
 
-        // setInterval(() => {
-        //     state.name += "1"
-        //     numberRef.value += 1
-        // }, 3000)
-
-        // 1 setup 里面初始化执行一次，闭包的特性
-        // numberRef.value 为 1 ， 永远
-        // const number = numberRef.value
+        const classesRef = useStyles()
         return () => {
-            // 2 变量会促使return不同的值
-            const number = numberRef.value
-            console.log(state.name)
-            // return h("div", { id: "app" }, [
-            //     h("img", {
-            //         alt: "Vue logo",
-            //         src: img,
-            //     }),
-            //     h(HelloWorld, {
-            //         msg: "Welcome to Your Vue.js + TS",
-            //         config: { name: "sunjing" },
-            //         age: 12,
-            //     }),
-            //     h("p", state.name + number),
-            // ])
-            //
-            // 替换新的 JSX 写法
+            const classes = classesRef.value
+
+            const code = toJson(schema)
             return (
-                <div id="app">
-                    <img src={img} alt="Vue logo" />
-                    <input type="text" v-model={state.name} />
-                    <p>{state.name + number}</p>
-                    {renderHelloWorld(
-                        "Welcome to Your Vue.js + TS",
-                        { name: "sunjing" },
-                        12,
-                    )}
+                <div>
+                    <MonacoEditor code={code} onChange={handleCodeChange} title="Schema" class={classes.editor} />
                 </div>
             )
         }
