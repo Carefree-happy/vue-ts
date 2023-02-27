@@ -4,7 +4,7 @@ import { createUseStyles } from "vue-jss"
 import MonacoEditor from "./components/MonacoEditor"
 // 这些是 json.schema 的例子（其中的结构也是有固定的结构的）
 import demos from "./demos"
-// import SchemaForm from "../lib"
+import SchemaForm from "../lib"
 
 // TODO: 在lib中export
 type Schema = any
@@ -174,7 +174,7 @@ export default defineComponent({
                             {/* 右边是我们的 schema 区域 */}
                             {/* // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore */}
-                            <SchemaForm />
+                            <SchemaForm schema={demo.schema} value={demo.data} onChange={handleChange} />
                             {/* <SchemaForm
                 schema={demo.schema}
                 uiSchema={demo.uiSchema || {}}
