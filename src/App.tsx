@@ -1,4 +1,4 @@
-import { defineComponent, Ref, ref } from "vue"
+import { defineComponent } from "vue"
 import { createUseStyles } from "vue-jss"
 import MonacoEditor from "./components/MonacoEditor"
 
@@ -18,8 +18,6 @@ const useStyles = createUseStyles({
 
 export default defineComponent({
     setup() {
-        const schemaRef: Ref<any> = ref(schema)
-
         const handleCodeChange = (code: string) => {
             let data: any
             try {
