@@ -2,7 +2,7 @@
 import { defineComponent, h, PropType } from "vue"
 import NumberField from "./fields/NumberField"
 import StringField from "./fields/StringField"
-import { FiledPropsDefine, SchemaTypes } from "../src/demos/types"
+import { FiledPropsDefine, SchemaTypes } from "./types"
 
 export default defineComponent({
     name: "SchemaItems",

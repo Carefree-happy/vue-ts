@@ -1,4 +1,4 @@
-import { Schema } from "@/demos/types"
+import { Schema } from "lib/types"
 import { defineComponent, PropType } from "vue"
 import SchemaItems from "./SchemaItems"
 

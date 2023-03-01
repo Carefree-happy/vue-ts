@@ -1,4 +1,4 @@
-import { FiledPropsDefine } from "@/demos/types"
+import { FiledPropsDefine } from "lib/types"
 import { defineComponent, h } from "vue"
 
 export default defineComponent({

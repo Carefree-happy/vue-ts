@@ -4,7 +4,7 @@
 
 <script lang="ts" setup="props">
 import { defineProps } from "vue"
-import { Schema } from "../../src/demos/types"
+import { Schema } from "../types"
 
 const props = defineProps<{
     value: any

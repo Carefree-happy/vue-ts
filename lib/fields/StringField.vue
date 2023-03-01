@@ -5,7 +5,7 @@
 <script lang="ts" setup="props">
 // import { ref } from 'vue'
 import { defineProps } from "vue"
-import { Schema } from "../../src/demos/types"
+import { Schema } from "../types"
 // export default {
 //   props: FiledPropsDefine,
 // }
