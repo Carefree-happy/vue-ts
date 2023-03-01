@@ -1,7 +1,8 @@
 import { defineComponent, PropType } from "vue"
-import { FiledPropsDefine, Schema } from "../types"
+import { FiledPropsDefine, Schema, SelectionWidgetNames } from "../types"
 import { useVJSFContext } from "../context"
 import { createUseStyles } from "vue-jss"
+import SelectionWidget from "../widgets/Selection"
 /**
  * {
  *  items: { type: string},
@@ -160,6 +161,13 @@ export default defineComponent({
                         </ArrayItemWrapper>
                     )
                 })
+            } else {
+                const enumOptions = (schema.items as Schema).enum
+                const options = enumOptions?.map((e) => ({
+                    key: e,
+                    value: e,
+                }))
+                return <SelectionWidget options={options || []} value={props.value} onChange={props.onChange} />
             }
 
             return <div></div>
