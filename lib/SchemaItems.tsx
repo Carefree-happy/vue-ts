@@ -1,5 +1,6 @@
 // 根据不同的类型来把对应渲染这个 schema 的工作交给对应的那个组件来做
 import { computed, defineComponent, h, PropType } from "vue"
+import ArrayField from "./fields/ArrayField"
 import NumberField from "./fields/NumberField"
 import ObjectField from "./fields/ObjectField"
 import StringField from "./fields/StringField"
@@ -32,6 +33,9 @@ export default defineComponent({
                     break
                 case SchemaTypes.OBJECT:
                     Component = ObjectField
+                    break
+                case SchemaTypes.ARRAY:
+                    Component = ArrayField
                     break
                 default:
                     console.warn(`${type} is not supported`)
